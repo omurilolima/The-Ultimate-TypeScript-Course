@@ -1,15 +1,9 @@
-// Defining the shape of an Employee Object with type
-type Employee = {
-	readonly id: number;
-	name: string;
-	retire: (date: Date) => void;
-};
+// Union types are use to receive more than one type for the same parameter
+function kgToLbs(weight: number | string): number {
+	// narrowing
+	if (typeof weight === "number") return weight * 2.2;
+	else return parseInt(weight) * 2.2;
+}
 
-// Anotate the object with the Employee type
-let employee: Employee = {
-	id: 1,
-	name: "Murilo",
-	retire: (date: Date) => {
-		console.log(date);
-	},
-};
+kgToLbs(10);
+kgToLbs("10kg");
