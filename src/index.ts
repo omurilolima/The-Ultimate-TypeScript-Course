@@ -1,7 +1,18 @@
-// Literal type is used to expecify allowed values
+type Customer = {
+	birthday?: Date;
+};
 
-type Quantity = 50 | 100;
-let quantity: Quantity = 100;
+function getCustomer(id: number): Customer | null {
+	return id === 0 ? null : { birthday: new Date() };
+}
 
-// It can be also used for other types, like string
-type Metric = "cm" | "inch";
+let customer = getCustomer(1);
+// Optional property operator "?"
+console.log(customer?.birthday?.getFullYear());
+
+// Optional element access operator
+//  customer?.[0]
+
+// Optional call
+let log: any = null;
+log?.("a");
