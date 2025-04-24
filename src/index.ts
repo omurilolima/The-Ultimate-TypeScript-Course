@@ -1,9 +1,16 @@
-// Union types are use to receive more than one type for the same parameter
-function kgToLbs(weight: number | string): number {
-	// narrowing
-	if (typeof weight === "number") return weight * 2.2;
-	else return parseInt(weight) * 2.2;
-}
+type Draggable = {
+	drag: () => void;
+};
 
-kgToLbs(10);
-kgToLbs("10kg");
+type Resizable = {
+	resize: () => void;
+};
+
+// Intersection Type is used to combine two types in a new type
+type UIWidget = Draggable & Resizable;
+
+// To initialize this object, we need to all members of draggable and resizeable
+let textBox: UIWidget = {
+	drag: () => {},
+	resize: () => {},
+};
