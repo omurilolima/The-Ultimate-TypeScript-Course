@@ -1,12 +1,15 @@
-// As a best practice, we should always properly annotate our functions
-// For a better experience, in the tsconfig.json uncomment
-// noUnusedParameters , noUnusedLocals and noImplicitReturns
+// Defining the shape of an Employee Object with type
+type Employee = {
+	readonly id: number;
+	name: string;
+	retire: (date: Date) => void;
+};
 
-// If you supplie a default value for a parameter, it will be optional when calling that function
-function calculateTax(income: number, taxYear = 2022): number {
-	if (taxYear < 2022) return income * 1.2;
-	return income * 1.3;
-}
-
-// If you pass a value for an optional parameter, it will override the default value
-calculateTax(10_000, 2023);
+// Anotate the object with the Employee type
+let employee: Employee = {
+	id: 1,
+	name: "Murilo",
+	retire: (date: Date) => {
+		console.log(date);
+	},
+};
