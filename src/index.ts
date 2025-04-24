@@ -1,16 +1,7 @@
-type Draggable = {
-	drag: () => void;
-};
+// Literal type is used to expecify allowed values
 
-type Resizable = {
-	resize: () => void;
-};
+type Quantity = 50 | 100;
+let quantity: Quantity = 100;
 
-// Intersection Type is used to combine two types in a new type
-type UIWidget = Draggable & Resizable;
-
-// To initialize this object, we need to all members of draggable and resizeable
-let textBox: UIWidget = {
-	drag: () => {},
-	resize: () => {},
-};
+// It can be also used for other types, like string
+type Metric = "cm" | "inch";
