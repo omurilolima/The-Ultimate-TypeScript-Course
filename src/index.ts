@@ -1,8 +1,7 @@
-let speed: number | null = null;
-let ride = {
-	// Falsy (undefined, null, '', false, 0)
-	// example: speed: speed || 30
-	// Nullish Coalescing operator (??) is used when
-	// the values can be null or undefined.
-	speed: speed ?? 30,
-};
+let phone = <HTMLInputElement>document.getElementById("phone");
+// OR
+// let phone = document.getElementById('phone') as HTMLInputElement;
+
+// To enable the value property of HTMLInputElement, we must specify
+// the element type on the first 1 using the notation
+phone.value;
