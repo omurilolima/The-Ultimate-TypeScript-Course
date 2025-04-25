@@ -1,8 +1,9 @@
 class Account {
 	// properties
-	id: number;
+	readonly id: number; // read-only property
 	owner: string;
 	balance: number;
+	nickname?: string; // optional property
 
 	// constructor
 	constructor(id: number, owner: string, balance: number) {
