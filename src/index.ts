@@ -1,7 +1,18 @@
-let phone = <HTMLInputElement>document.getElementById("phone");
-// OR
-// let phone = document.getElementById('phone') as HTMLInputElement;
+class Account {
+	// properties
+	id: number;
+	owner: string;
+	balance: number;
 
-// To enable the value property of HTMLInputElement, we must specify
-// the element type on the first 1 using the notation
-phone.value;
+	// constructor
+	constructor(id: number, owner: string, balance: number) {
+		this.id = id;
+		this.owner = owner;
+		this.balance = balance;
+	}
+	// methods
+	deposit(amount: number): void {
+		if (amount <= 0) throw new Error("Invalid amount");
+		this.balance += amount;
+	}
+}
