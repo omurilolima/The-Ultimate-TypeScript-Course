@@ -1,52 +1,30 @@
-// WRONG APPROACH
-// Here we are dealing with two separate objects
-// and each object has a separate space in memory.
-// So each object is independently tracking the active rides.
-// Thats why this approach does not work.
+class Person {
+	//  CONSTRUCTOR
+	constructor(public firstName: string, public lastName: string) {}
 
-// class Ride {
-// 	activeRides: number = 0;
-
-// 	start() {
-// 		this.activeRides++;
-// 	}
-// 	stop() {
-// 		this.activeRides--;
-// 	}
-// }
-
-// let ride1 = new Ride();
-// ride1.start();
-
-// let ride2 = new Ride();
-// ride2.start();
-
-// console.log(ride1.activeRides);
-// console.log(ride2.activeRides);
-
-// RIGHT APPROACH
-// Here we need to define a static property and now the property belongs to
-// the Ride class and not to the ride object
-class Ride {
-	private static _activeRides: number = 0; // private and static property
-	start() {
-		Ride._activeRides++;
+	// METHODS
+	get fullName() {
+		return this.firstName + " " + this.lastName;
 	}
-	stop() {
-		Ride._activeRides--;
-	}
-	static get activeRides() {
-		// static method
-		return Ride._activeRides;
+	walk() {
+		console.log("Walking");
 	}
 }
 
-let ride1 = new Ride();
-ride1.start();
-let ride2 = new Ride();
-ride2.start();
+// Use the EXTENDS keyword to tell that student class
+// inherit everything from the Person class
 
-console.log(Ride.activeRides);
+class Student extends Person {
+	//  CONSTRUCTOR
+	constructor(studentId: number, firstName: string, lastName: string) {
+		super(firstName, lastName);
+	}
 
-// When you make a property or a method static, that property or method becomes
-// part of a class and will have only a single instance of them in memory.
+	// METHODS
+	takeTest() {
+		console.log("Taking a test");
+	}
+}
+
+// Creating a Student object
+let student = new Student(1, "John", "Malkovich");
