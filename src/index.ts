@@ -16,15 +16,23 @@ class Person {
 
 class Student extends Person {
 	//  CONSTRUCTOR
-	constructor(studentId: number, firstName: string, lastName: string) {
+	constructor(firstName: string, lastName: string) {
 		super(firstName, lastName);
 	}
 
 	// METHODS
 	takeTest() {
-		console.log("Taking a test");
+		console.log("Student: " + "Taking a test");
 	}
 }
 
-// Creating a Student object
-let student = new Student(1, "John", "Malkovich");
+class Teacher extends Person {
+	override get fullName() {
+		return "Professor " + super.fullName;
+	}
+}
+
+let student = new Student("Jose", "Smith");
+let teacher = new Teacher("John", "Smith");
+
+console.log(teacher.fullName);
