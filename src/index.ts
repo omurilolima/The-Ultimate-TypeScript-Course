@@ -1,18 +1,39 @@
-class Person {
-	constructor(public name: string) {}
+interface Product {
+	name: string;
+	price: number;
 }
 
-class Customer extends Person {}
-class Client extends Person {}
+// Defining a Generic Classes
 
-// Use extends to define that echo needs to receive  a expecific type
-// In this exemple, echo receives any object that is a Person
+class Store<T> {
+	// Here we don't need a constructor because we are initializing (to an empty array)
+	// We are defining it as protected to prevent objects of beeing reassigned out of a class
+	// and inherited in child classes
+	protected _objects: T[] = [];
 
-function echo<T extends Person>(value: T): T {
-	return value;
+	add(obj: T): void {
+		this._objects.push(obj);
+	}
 }
 
-echo({ name: "a" });
-echo(new Person("a"));
-echo(new Customer("a"));
-echo(new Client("a"));
+// EXTENDING GENERIC CLASSES
+
+// Case 1 - Passing on the generic type parameter
+// The type passed for base class is also going to be used in the child class (e.g: Product)
+class CompressibleStore<T> extends Store<T> {
+	compress() {}
+}
+
+// Case 2 - Restricting the generic type parameter
+class SearchableStore<T extends { name: string }> extends Store<T> {
+	find(name: string): T | undefined {
+		return this._objects.find((obj) => obj.name === name);
+	}
+}
+
+// Case 3 - Fix the generic type parameter
+class ProductStore extends Store<Product> {
+	filterByCategory(category: string): Product[] {
+		return [];
+	}
+}
