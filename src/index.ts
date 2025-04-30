@@ -1,3 +1,15 @@
+// POLYMORPHISM
+// 		Is one of the core principles of OOP
+// 		It means to "many forms" and this refers to the situation
+// 		where and object can take many different forms.
+// 		In this exemple, the printNames function receives a Person object
+// 		that can be a Studet, Teach or Principal
+
+// OPEN CLOSED PRINCIPLE
+// 		Classes should be OPEN for extension and CLOSED for modification.
+// 		In this exemple, we can add another class that extends from Person
+// 		without the need of modifying the printNames function.
+
 class Person {
 	//  CONSTRUCTOR
 	constructor(public firstName: string, public lastName: string) {}
@@ -32,7 +44,18 @@ class Teacher extends Person {
 	}
 }
 
-let student = new Student("Jose", "Smith");
-let teacher = new Teacher("John", "Smith");
+class Principal extends Person {
+	override get fullName() {
+		return "Principal " + super.fullName;
+	}
+}
 
-console.log(teacher.fullName);
+printNames([
+	new Student("John", "Smith"),
+	new Teacher("Murilo", "Lima"),
+	new Principal("Mosh", "Hamedani"),
+]);
+
+function printNames(people: Person[]) {
+	for (let person of people) console.log(person.fullName);
+}
