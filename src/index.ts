@@ -1,6 +1,7 @@
-class KeyValuePair<K, V> {
-	constructor(public key: K, public value: V) {}
+class ArrayUtils {
+	static wrapInArray<T>(value: T) {
+		return [value];
+	}
 }
 
-// With generic classes we do not need to specify the type of each argument
-let pair = new KeyValuePair(1, "a");
+let numbers = ArrayUtils.wrapInArray(1);
