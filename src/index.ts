@@ -1,21 +1,6 @@
-// Interfaces vs Types
-// In TypeScript, interfaces and type aliases can be used interchangeably.
-// Both can be used to describe the shape of an object:
-
-// INTERFACE
-interface Person {
-	name: string;
+class KeyValuePair<K, V> {
+	constructor(public key: K, public value: V) {}
 }
-let person: Person = {
-	name: "Mosh",
-};
 
-// TYPE;
-type PersonT = {
-	name: string;
-};
-let persont: Person = {
-	name: "Mosh",
-};
-
-// It’s more conventional to use an interface in front of the extends keyword, though.
+// With generic classes we do not need to specify the type of each argument
+let pair = new KeyValuePair(1, "a");
