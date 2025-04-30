@@ -1,29 +1,18 @@
-//  http://mywebsite.com/users
-//  http://mywebsite.com/products
-
-// Create an Interface to store the result of calling an API endpoint
-// T | null is used because we may not necessarily get the data
-// T | null is used because we may not necessarily get an error
-
-interface Result<T> {
-	data: T | null;
-	error: string | null;
+class Person {
+	constructor(public name: string) {}
 }
 
-function fetch<T>(url: string): Result<T> {
-	return { data: null, error: null };
+class Customer extends Person {}
+class Client extends Person {}
+
+// Use extends to define that echo needs to receive  a expecific type
+// In this exemple, echo receives any object that is a Person
+
+function echo<T extends Person>(value: T): T {
+	return value;
 }
 
-interface User {
-	username: string;
-}
-
-interface Product {
-	title: string;
-}
-
-let result = fetch<Product>("url");
-result.data?.title;
-
-let result2 = fetch<User>("url");
-result2.data?.username;
+echo({ name: "a" });
+echo(new Person("a"));
+echo(new Customer("a"));
+echo(new Client("a"));
