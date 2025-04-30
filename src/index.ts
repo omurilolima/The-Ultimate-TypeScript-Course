@@ -1,61 +1,32 @@
-// POLYMORPHISM
-// 		Is one of the core principles of OOP
-// 		It means to "many forms" and this refers to the situation
-// 		where and object can take many different forms.
-// 		In this exemple, the printNames function receives a Person object
-// 		that can be a Studet, Teach or Principal
+// If a the calendar class is not providing any logic or algorithm
+// that subclasses can reuse.  So, in this case, it's better to use an interface.
+// because the code will end up being more concise and shorter both in
+// Typescript and Javascript
 
-// OPEN CLOSED PRINCIPLE
-// 		Classes should be OPEN for extension and CLOSED for modification.
-// 		In this exemple, we can add another class that extends from Person
-// 		without the need of modifying the printNames function.
-
-class Person {
-	//  CONSTRUCTOR
-	constructor(public firstName: string, public lastName: string) {}
-
-	// METHODS
-	get fullName() {
-		return this.firstName + " " + this.lastName;
-	}
-	walk() {
-		console.log("Walking");
-	}
+interface Calendar {
+	name: string;
+	addEvent(): void;
+	removeEvent(): void;
 }
+// In constrast, if you had some logic, algorithm or method with a few lines
+// and you wanted to share that code amongst subclasses, then you couldn't use
+// an interface because they can not have methods impementations.
 
-// Use the EXTENDS keyword to tell that student class
-// inherit everything from the Person class
+// abstract class Calendar {
+// 	constructor(public name: string) {}
+// 	abstract addEvent(): void;
+// 	abstract removeEvent(): void;
+// }
 
-class Student extends Person {
-	//  CONSTRUCTOR
-	constructor(firstName: string, lastName: string) {
-		super(firstName, lastName);
+// Interfaces can be extended using the "implements" keyword
+
+class GoogleCalendar implements Calendar {
+	constructor(public name: string) {}
+
+	addEvent(): void {
+		throw new Error("Method not implemented.");
 	}
-
-	// METHODS
-	takeTest() {
-		console.log("Student: " + "Taking a test");
+	removeEvent(): void {
+		throw new Error("Method not implemented.");
 	}
-}
-
-class Teacher extends Person {
-	override get fullName() {
-		return "Professor " + super.fullName;
-	}
-}
-
-class Principal extends Person {
-	override get fullName() {
-		return "Principal " + super.fullName;
-	}
-}
-
-printNames([
-	new Student("John", "Smith"),
-	new Teacher("Murilo", "Lima"),
-	new Principal("Mosh", "Hamedani"),
-]);
-
-function printNames(people: Person[]) {
-	for (let person of people) console.log(person.fullName);
 }
