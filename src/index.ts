@@ -14,26 +14,15 @@ class Store<T> {
 	add(obj: T): void {
 		this._objects.push(obj);
 	}
-}
 
-// EXTENDING GENERIC CLASSES
-
-// Case 1 - Passing on the generic type parameter
-// The type passed for base class is also going to be used in the child class (e.g: Product)
-class CompressibleStore<T> extends Store<T> {
-	compress() {}
-}
-
-// Case 2 - Restricting the generic type parameter
-class SearchableStore<T extends { name: string }> extends Store<T> {
-	find(name: string): T | undefined {
-		return this._objects.find((obj) => obj.name === name);
+	// IF T is Product
+	// keyof T is gonna return 'name' | 'price'
+	find(property: keyof T, value: unknown): T | undefined {
+		return this._objects.find((obj) => obj[property] === value);
 	}
 }
 
-// Case 3 - Fix the generic type parameter
-class ProductStore extends Store<Product> {
-	filterByCategory(category: string): Product[] {
-		return [];
-	}
-}
+let store = new Store<Product>();
+store.add({ name: "a", price: 1 });
+store.find("name", "a");
+store.find("price", "1");
