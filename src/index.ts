@@ -1,25 +1,26 @@
-// DECORATOR - A function that is called by the JavaScript runtime
+// Applying multiple decorators to a class
 
-// Depending on where we are going to apply this decorator,
-// the number and type parameters varies.
-// If we're going to apply on a CLASS, we should have a single
-// parameter that represents the CONSTRUCTOR function.
+type ComponentOptions = {
+	selector: string;
+};
 
-// We can call it anything, but, by convention it's better to call it "constructor".
-// If the type is a function, the runtime assumes that we're going to apply this
-// on a class. And this represents our constructor function.
-
-function Component(constructor: Function) {
-	// Here we can modify or enhance our class
-	console.log("Component decorator called");
-
-	// We can add new properties and methods in the PROTOTYPE. Then, all classes
-	// that has this decorator will inherit those new properties and methods.
-	constructor.prototype.uniqueId = Date.now();
-	constructor.prototype.insertInDOM = () => {
-		console.log("Inserting the component in the DOM");
+function Component(options: ComponentOptions) {
+	return (constructor: Function) => {
+		console.log("Component decorator called");
+		constructor.prototype.options = options;
+		constructor.prototype.uniqueId = Date.now();
+		constructor.prototype.insertInDOM = () => {
+			console.log("Inserting the component in the DOM");
+		};
 	};
 }
 
-@Component
+function Pipe(constructor: Function) {
+	console.log("Pipe decorator called");
+	constructor.prototype.pipe = true;
+}
+
+// Decorators are called in the reverse order of appearance
+@Component({ selector: "#myprofile" })
+@Pipe
 class ProfileComponent {}
