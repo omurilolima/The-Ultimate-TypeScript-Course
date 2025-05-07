@@ -1,1 +1,1 @@
-import Store, { Format } from "./storage";
+import { Circle, Square } from "./shapes";
